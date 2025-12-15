@@ -1,6 +1,9 @@
 @extends('layout')
 
 @section('content')
+@php
+  $periode = $periode ?? 'this_week';
+@endphp
 <div class="max-w-5xl mx-auto">
 
   <div class="bg-white rounded-xl shadow p-6 mb-6">
@@ -21,9 +24,29 @@
         <div class="text-sky-600 font-semibold text-lg mt-2">{{ $total_orders }}</div>
       </div>
       <div class="bg-white border rounded p-4">
-        <div class="text-sm text-slate-500">—</div>
-        <div class="text-slate-600 font-semibold text-lg mt-2">&nbsp;</div>
-      </div>
+  <div class="text-sm text-slate-500">Periode Laporan</div>
+
+  <form method="GET" class="mt-2">
+    <select name="periode"
+      onchange="this.form.submit()"
+      class="w-full border rounded px-2 py-1 text-sm">
+
+      <option value="this_week" {{ $periode=='this_week'?'selected':'' }}>
+        Minggu Ini
+      </option>
+      <option value="today" {{ $periode=='today'?'selected':'' }}>
+        Hari Ini
+      </option>
+      <option value="this_month" {{ $periode=='this_month'?'selected':'' }}>
+        Bulan Ini
+      </option>
+      <option value="this_year" {{ $periode=='this_year'?'selected':'' }}>
+        Tahun Ini
+      </option>
+    </select>
+  </form>
+</div>
+
     </div>
   </div>
 

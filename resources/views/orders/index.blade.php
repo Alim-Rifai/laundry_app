@@ -43,11 +43,39 @@
             <!-- WA button - hanya jika sudah selesai akan diarahkan oleh controller, tapi kita buat tombol manual juga -->
             @if($order->phone)
               @php
-                $payText = $order->payment_status === 'lunas' ? '✅ LUNAS' : '⚠️ BELUM LUNAS';
-                $total = number_format($order->total_price,0,',','.');
-                $waMsg = urlencode("Halo {$order->customer_name}! Laundry Anda dengan layanan {$order->service->name} seberat {$order->weight}kg sudah selesai. Total: Rp {$total}. Status Pembayaran: {$payText}. Terima kasih!");
-                $waLink = "https://wa.me/".preg_replace('/[^0-9]/','',$order->phone)."?text={$waMsg}";
-              @endphp
+                  $phone = preg_replace('/[^0-9]/', '', $order->phone);
+                  $total = number_format($order->total_price,0,',','.');
+
+                  if ($order->payment_status === 'lunas') {
+                  $message = <<<TEXT
+                  Halo {$order->customer_name},
+
+                  Laundry Anda dengan layanan {$order->service->name} seberat {$order->weight} kg telah SELESAI dan pembayaran telah kami terima.
+
+                  Total Pembayaran : Rp {$total}
+                  Status Pembayaran : LUNAS
+
+                  Silakan mengambil laundry Anda di Laundry Mama Agra.
+                  Terima kasih telah menggunakan jasa kami.
+                  TEXT;
+                  } else {
+                  $message = <<<TEXT
+                  Halo {$order->customer_name},
+
+                  Laundry Anda dengan layanan {$order->service->name} seberat {$order->weight} kg telah SELESAI.
+
+                  Total Pembayaran : Rp {$total}
+                  Status Pembayaran : BELUM LUNAS
+
+                  Mohon segera melakukan pelunasan dan mengambil laundry Anda di Laundry Mama Agra.
+                  Terima kasih atas kepercayaan Anda.
+                  TEXT;
+                  }
+
+                  $waLink = "https://wa.me/{$phone}?text=" . urlencode($message);
+                  @endphp
+
+
               <a href="{{ $waLink }}" target="_blank" class="bg-green-600 text-white px-4 py-2 rounded flex items-center justify-center">Kirim ke WA</a>
             @endif
           </div>
