@@ -8,9 +8,25 @@ use App\Models\Service;
 
 class OrderController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $orders = Order::with('service')->orderBy('created_at','desc')->get();
+        // QUERY DASAR (TIDAK DIUBAH)
+        $query = Order::with('service')
+            ->orderBy('created_at', 'desc');
+
+        // ✅ FILTER STATUS PESANAN
+        if ($request->filled('status')) {
+            $query->where('status', $request->status);
+        }
+
+        // ✅ FILTER STATUS PEMBAYARAN
+        if ($request->filled('payment_status')) {
+            $query->where('payment_status', $request->payment_status);
+        }
+
+        // AMBIL DATA
+        $orders = $query->get();
+
         return view('orders.index', compact('orders'));
     }
 
@@ -48,10 +64,9 @@ class OrderController extends Controller
         return back()->with('success','Status berhasil diperbarui.');
     }
 
-
-        public function destroy(Order $order)
-        {
-            $order->delete();
-            return back()->with('success','Pesanan dihapus.');
-        }
+    public function destroy(Order $order)
+    {
+        $order->delete();
+        return back()->with('success','Pesanan dihapus.');
     }
+}

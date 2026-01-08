@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Sistem Pendapatan Laundry Mama Agra</title>
+  <title>Sistem Pendapatan Laundry Express</title>
 
   <!-- Tailwind CDN (cepat untuk demo) -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -30,8 +30,8 @@
             </svg>
           </div>
           <div>
-            <h1 class="text-indigo-600 font-semibold text-xl">Sistem Pendapatan Laundry Mama Agra</h1>
-            <p class="text-slate-500 text-sm">Kelola pesanan dan laporan pendapatan laundry Mama Agra</p>
+            <h1 class="text-indigo-600 font-semibold text-xl">Sistem Pendapatan Laundry Express</h1>
+            <p class="text-slate-500 text-sm">Kelola pesanan dan laporan pendapatan laundry Express</p>
           </div>
         </div>
       </div>
@@ -57,7 +57,7 @@
   </main>
 
   <footer class="text-center py-6 text-slate-500 text-sm">
-    &copy; {{ date('Y') }} Laundry Mama Agra
+    &copy; {{ date('Y') }} Laundry Express
   </footer>
 
 </body>
