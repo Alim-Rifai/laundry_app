@@ -17,3 +17,4 @@ Route::post('orders/{order}/update-status', [OrderController::class,'updateStatu
 Route::delete('orders/{order}', [OrderController::class,'destroy'])->name('orders.destroy');
 
 Route::get('reports', [ReportController::class,'index'])->name('reports.index');
+Route::put('/orders/{order}/update-status', [OrderController::class, 'updateStatus'])->name('orders.updateStatus');

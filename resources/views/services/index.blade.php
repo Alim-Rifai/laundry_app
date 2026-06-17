@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('content')
-<div class="max-w-4xl mx-auto space-y-6">
+<div class="max-w-2xl mx-auto">
 
   {{-- FORM TAMBAH LAYANAN --}}
   <div class="bg-white rounded-xl shadow p-6">
